@@ -59,7 +59,7 @@ class App extends Component {
     const books = [...this.state.books, book];
 
     // clear out current values for author, isbn, and title and set books array to data/books.js with the new values added
-    this.setState({
+    this.state.newBookIsbn && this.state.newBookTitle && this.state.newBookAuthor && this.setState({
       books,
       newBookAuthor: "",
       newBookIsbn: "",
