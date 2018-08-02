@@ -7,43 +7,49 @@ import TextBox from "../components/text-box/text-box";
 import BookList from "../components/book-list/book-list";
 
 class App extends Component {
-  state = {
-    // current state for list of books, new book title, new book isbn, and new book author
-    newBookTitle: "",
-    newBookIsbn: "",
-    newBookAuthor: "",
-    books: initialBooks,
-  };
+	constructor(props){
+		super(props);
+
+		this.state = {
+			// current state for list of books, new book title, new book isbn, and new book author
+			newBookTitle: "",
+			newBookIsbn: "",
+			newBookAuthor: "",
+			books: initialBooks
+		};
+
+		this.handleChangeNewBookTitleTextBox = this.handleChangeNewBookTitleTextBox.bind(this);
+		this.handleChangeNewBookIsbnTextBox = this.handleChangeNewBookIsbnTextBox.bind(this);
+		this.handleChangeNewBookAuthorTextBox = this.handleChangeNewBookAuthorTextBox.bind(this);
+		this.handleOnSubmit = this.handleOnSubmit.bind(this);
+	}
 
   // method to handle the change of text within textbox for new book title
-  handleChangeNewBookTitleTextBox = e => {
-    this.setState({
-      newBookTitle: e.target.value
-    });
+  handleChangeNewBookTitleTextBox(title){
+    this.setState((preStates) => ({
+			...preStates,
+      newBookTitle: title
+    }));
   };
 
   // method to handle the change of text within textbox for new book isbn
-  handleChangeNewBookIsbnTextBox = e => {
-    this.setState({
-      newBookIsbn: e.target.value
-    });
+  handleChangeNewBookIsbnTextBox(newBookIsbn){
+    this.setState((preStates) => ({
+			...preStates,
+      newBookIsbn
+    }));
   };
 
   // method to handle the change of text within textbox for new book author
-  handleChangeNewBookAuthorTextBox = e => {
-    this.setState({
-      newBookAuthor: e.target.value
-    });
+  handleChangeNewBookAuthorTextBox(newBookAuthor){
+    this.setState((preStates) => ({
+			...preStates,
+      newBookAuthor
+    }));
   };
 
   // handle clicking the add book button
-  handleOnSubmit = () => {
-    this.addBook();
-  };
-
-  // method to handle event created by clicking the 'add book' button to add book to current list of books in data/books.js
-  addBook = () => {
-    // create new book object from current state of isbn, title, and author
+  handleOnSubmit(){
     const book = {
       isbn: this.state.newBookIsbn,
       title: this.state.newBookTitle,
@@ -62,6 +68,7 @@ class App extends Component {
   };
 
   render() {
+		const {newBookIsbn, newBookTitle, newBookAuthor, books} = this.state;
     return (
       <div>
         <header className="App-header">
@@ -72,23 +79,26 @@ class App extends Component {
         <div className="new-book-form">
           <label>ISBN: </label>
           <TextBox
-            value={this.state.newBookIsbn}
+						placeholder="ISBN"
+            value={newBookIsbn}
             change={this.handleChangeNewBookIsbnTextBox}
           />
           <label>Title: </label>
           <TextBox
-            value={this.state.newBookTitle}
+						placeholder="Title"
+            value={newBookTitle}
             change={this.handleChangeNewBookTitleTextBox}
           />
           <label>Author: </label>
           <TextBox
-            value={this.state.newBookAuthor}
+						placeholder="Author"
+            value={newBookAuthor}
             change={this.handleChangeNewBookAuthorTextBox}
           />
           <button onClick={this.handleOnSubmit} className="form-button">Add Book</button>
         </div>
         <h2>Book List</h2>
-        <BookList books={this.state.books} />
+        <BookList books={books} />
       </div>
     );
   }
