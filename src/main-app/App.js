@@ -17,15 +17,10 @@ class App extends Component {
 			newBookAuthor: "",
 			books: initialBooks
 		};
-
-		this.handleChangeNewBookTitleTextBox = this.handleChangeNewBookTitleTextBox.bind(this);
-		this.handleChangeNewBookIsbnTextBox = this.handleChangeNewBookIsbnTextBox.bind(this);
-		this.handleChangeNewBookAuthorTextBox = this.handleChangeNewBookAuthorTextBox.bind(this);
-		this.handleOnSubmit = this.handleOnSubmit.bind(this);
 	}
 
   // method to handle the change of text within textbox for new book title
-  handleChangeNewBookTitleTextBox(title){
+  handleChangeNewBookTitleTextBox = (title) => {
     this.setState((preStates) => ({
 			...preStates,
       newBookTitle: title
@@ -33,7 +28,7 @@ class App extends Component {
   };
 
   // method to handle the change of text within textbox for new book isbn
-  handleChangeNewBookIsbnTextBox(newBookIsbn){
+  handleChangeNewBookIsbnTextBox = (newBookIsbn) => {
     this.setState((preStates) => ({
 			...preStates,
       newBookIsbn
@@ -41,7 +36,7 @@ class App extends Component {
   };
 
   // method to handle the change of text within textbox for new book author
-  handleChangeNewBookAuthorTextBox(newBookAuthor){
+  handleChangeNewBookAuthorTextBox = (newBookAuthor) => {
     this.setState((preStates) => ({
 			...preStates,
       newBookAuthor
@@ -49,7 +44,7 @@ class App extends Component {
   };
 
   // handle clicking the add book button
-  handleOnSubmit(){
+  handleOnSubmit = () => {
     const book = {
       isbn: this.state.newBookIsbn,
       title: this.state.newBookTitle,

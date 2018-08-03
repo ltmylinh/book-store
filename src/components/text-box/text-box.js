@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 
 class TextBox extends Component{
-	constructor(props){
-		super(props);
 
-		this.handleOnchange = this.handleOnchange.bind(this);
-	}
-
-	handleOnchange(evt){
+	handleOnchange = (evt) => {
 		this.props.change(evt.target.value);
 	}
 
